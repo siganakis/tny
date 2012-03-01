@@ -1,0 +1,50 @@
+========================
+Introduction
+========================
+
+Tny is a project that seeks to find and develop high performance data
+strutures that have very low memory foot prints.  The hope is that these
+structures may form the basis of a high performance in-memory column oriented
+database for analyzing genomic information.
+
+In developing software for large data sets (billions of records, terabytes in size) 
+the way you store your data in memory is critical – and you want your data in memory
+if you want to be able to analyse it quickly (e.g. minutes not days).
+
+Any data structure that relies on pointers for each data element quickly becomes
+unworkable due to the overhead of pointers.  On a 64 bit system, with one pointer
+for each data element across a billion records you have just blown near 8GB of
+memory just in pointers.
+
+Thus there is a need for compact data structures that still have fast access characteristics.
+
+========================
+The Challenge
+========================
+
+The challenge is to come up with the fastest data structure that meets the following requirements:
+•	Use less memory than an array in all circumstances
+•	Fast Seek is more important than Fast Access
+•	Seek and Access must be better than O(N).
+
+Where Seek and Access are defined as:
+
+	Access (int index): Return me the value at the specified index ( like array[idx] ). 
+	 
+	Seek (int value): Return me all the Indexes that match value. 
+
+
+(The actual return type of Seek is a little different, but logically the same.  What we need to return is a bitmap where a bit set to 1 at position X means that value was found at index X.  This allows us to combine results using logical ANDs rather than intersections as detailed here)
+
+
+For more information pleace check my blog at:
+
+http://siganakis.com
+
+This project is released under the GPL.
+
+Contact me at terence@siganakis.com.
+
+
+
+  
